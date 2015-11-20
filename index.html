@@ -1,0 +1,50 @@
+<!doctype html>
+
+<html>
+<head>
+  <title>PolymerVizCodeLab</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+  <link rel="import" href="bower_components/point-overlay/point-overlay.html">
+  <link rel="import" href="bower_components/google-map/google-map.html">
+
+  <link rel="import" href="bower_components/point-overlay/point-overlay.html">
+  <link rel="import" href="bower_components/paper-card/paper-card.html">
+  <link rel="import" href="bower_components/paper-slider/paper-slider.html">
+  <link rel="import" href="bower_components/iron-ajax/iron-ajax.html"> 
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body unresolved>
+ <template is="dom-bind" id="t">
+  <google-map map={{map}} latitude="38.6" longitude="-95.8" zoom="5"
+    styles='[{"stylers":[{"saturation":-85}]},{"featureType":"water","stylers":[{"lightness":-20}]}]'
+    on-zoom-changed="setPointSize"
+    on-google-map-ready="setPointSize">
+  </google-map>
+  <point-overlay map="[[map]]" data='{{data}}' uniforms="{{uniforms}}">
+  </point-overlay>
+  <iron-ajax auto handle-as="json"
+    url="bower_components/point-overlay/tornadoes-1950-2014.json"
+    last-response="{{data}}">
+  </iron-ajax>
+  <!--<paper-card elevation="2">
+    <paper-slider min="5" max="100" value="30"  immediate-value="{{uniforms.pointSize}}">
+    </paper-slider>
+  </paper-card>-->
+  
+</body>
+</template>
+<script>
+  var t=document.querySelector("#t");
+  t.setPointSize = function(e){
+    this.uniforms.pointSize = Math.exp(0.3* this.map.getZoom());
+    this.notifyPath('uniforms.pointSize', this.uniforms.pointSize);
+  };
+</script>
+</html>

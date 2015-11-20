@@ -1,0 +1,15 @@
+{
+  "name": "PolymerVizCodeLab",
+  "description": "",
+  "homepage": "",
+  "keywords": [
+  ],
+  "author": "",
+  "private": true,
+  "dependencies": {
+    "point-overlay":"googlecodelabs/polymer-webgl-visualization",
+    "google-map":"GoogleWebComponents/google-map#^1.1.1",
+    "iron-elements": "PolymerElements/iron-elements#^1.0.0",
+    "paper-elements": "PolymerElements/paper-elements#^1.0.1"
+  }
+}
